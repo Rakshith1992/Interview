@@ -38,20 +38,14 @@ export class ProcessedDataService {
             var worksheet = this.workbook.Sheets[first_sheet_name];
             console.log(XLSX.utils.sheet_to_json(worksheet,{raw:true}));
             this.processedData = XLSX.utils.sheet_to_json(worksheet);
-            console.log("Process: " + this.processedData);
+            console.log("Process: " , this.processedData);
             this.processedData.forEach(item => {
                this.temp.push(item); 
             });
-            console.log("Answer:" +this.temp);
+            console.log("Answer:" , this.temp);
             
         }
-        fileReader.readAsArrayBuffer(this.file);
-        
-        //console.log("ServiceValue:" + this.processedData);
-        //console.log(this.temp.sort())
-        //console.log(this.temp.sort(this.sortByProperty('Amount')))
-  
-        
+        fileReader.readAsArrayBuffer(this.file);  
   }
   
   
