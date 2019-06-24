@@ -1,23 +1,17 @@
 <p>
-  <button (click)="clickMe()">Bar Chart</button>
-</p>
-
-<p>
-    <button (click)="clickMe()">Pie Chart</button>
-</p>
-
-<p>
-    <button (click)="clickMe()">Doughnut Chart </button>
-</p>  
-
-<div *ngIf = "barChart">
-    <canvas id = "barCanvas"> {{ mychart }} </canvas>
-</div>  
-
-<div *ngIf = "pieChart">
-    <canvas id = "pieCanvas"> {{ mychart }} </canvas>
-</div> 
-
-<div *ngIf = "doughnutChart">
-    <canvas id = "doughnutCanvas"> {{ mychart }} </canvas>
-</div> 
+    <button (click)="clickMe()">Show Charts</button>
+  </p>
+  Chart Title: <input type="text" name="chartTitle"  [(ngModel)]="username" value="" id="chartTitle">
+  
+  <div *ngIf = "barChart">
+      <canvas id = "barCanvas"> {{ mychart }} </canvas>
+  </div>  
+  
+  <div *ngIf = "pieChart">
+      <canvas id = "pieCanvas"> {{ mychart }} </canvas>
+  </div> 
+  
+  <div *ngIf = "doughnutChart">
+      <canvas id = "doughnutCanvas"> {{ mychart }} </canvas>
+  </div> 
+  

@@ -1,28 +1,43 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTable } from '@angular/material';
-import { DataTableDataSource, DataTableItem } from './data-table-datasource';
+import { Component, OnInit, Input } from '@angular/core';
+import { ProcessedDataService } from '../processed-data.service';
+import {Sort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-data-table',
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.css']
 })
-export class DataTableComponent implements AfterViewInit, OnInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatTable) table: MatTable<DataTableItem>;
-  dataSource: DataTableDataSource;
-
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = [ 'name', 'amount', 'taxcode'];
+export class DataTableComponent implements OnInit {
+  @Input() result;
+  temp = [];
+  sortedData;
+  
+  constructor (private dataService: ProcessedDataService){
+    this.temp = this.dataService.data;
+    this.sortedData = this.temp;
+  }
 
   ngOnInit() {
-    this.dataSource = new DataTableDataSource();
   }
 
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
+  sortData(sort: Sort) {
+    const data = this.sortedData.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedData = data;
+      return;
+    }
+    
+    this.sortedData = data.sort((a, b) => {
+      return compare(a[sort.active], 
+        b[sort.active], 
+        sort.direction === 'asc');
+    });
+
+    
   }
 }
+
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+}
+

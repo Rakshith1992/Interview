@@ -3,7 +3,6 @@ import * as XLSX from 'ts-xlsx';
 import { ProcessedDataService } from './processed-data.service';
 import { readFile, read} from 'xlsx';
 import { from } from 'rxjs';
-//import { readFileSync } from 'fs';
 
 @Component({
   selector: 'my-app',
@@ -12,16 +11,14 @@ import { from } from 'rxjs';
   providers: [ProcessedDataService]
 })
 export class AppComponent {
-  name = 'Angular';
   temp = []
+  chartData;
+  result = true;
   
-constructor (private dataService: ProcessedDataService){
-  //this.dataService.incomingfile(event);
-  //this.dataService.upload();
-  //this.temp = this.dataService.temp;
-}
+//constructor (private dataService: ProcessedDataService){}
 
-incomingfile(){
+
+/* incomingfile(){
   this.dataService.incomingfile1(event);
   
 }
@@ -29,18 +26,23 @@ incomingfile(){
 upload(){
   this.dataService.upload1();
   this.temp = this.dataService.temp;
-  
-    //console.log(res);
-    //console.log(this.temp1);
-    //this.temp1 = this.dataService.temp(res);
-    //console.log(this.temp1);
+  } */
 
+
+  
+  
+  constructor (private dataService: ProcessedDataService){
   }
 
+  incomingfile(){
+    this.dataService.incomingfile1(event);
+    this.dataService.upload();
+    this.temp = this.dataService.data;
+  }
 
-
- //this.temp1 = this.dataService.temp;
-  //console.log("ProcessedData: " + this.temp1);
+  onClick(val){
+    this.result = val.currentTarget.value;
+  }
 }
 
 

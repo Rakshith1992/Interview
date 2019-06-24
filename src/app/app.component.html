@@ -1,26 +1,26 @@
-      
-      <div class="Block">
-            <label id="lbl">Code </label>
-            <input type='file' (change)="incomingfile($event)">
-          
-          </div>
-          <button (click)="upload()">Process</button>
-
-          <app-charts ></app-charts>
-          
-          
-           <table style="padding: 20px; width: 60%;">
-            <tr>
-              <th  align="left">Expense Description</th>
-              <th  align="left">Amount</th>
-              <th  align="left">Tax Code</th>
-              <th  align="left">Category</th>
-            </tr>
-            <tr *ngFor="let item of temp">
-              <td>{{item.Expense}}</td>
-              <td>{{item.Amount}}</td>
-              <td>{{item.Tax}}</td>
-              <td>{{item.Category}}</td> 
-            </tr>
-          </table>    
  
+<div class="container content">
+  <div>
+    <input type='file' (change)="incomingfile($event)">
+  </div>
+
+  Category Column
+  <div class="form-check form-check-inline">
+    <input type="radio" class="form-check-input" ngModel="result" (click)="onClick($event)" value="true" name="catColumn" mdbInput>
+    <label class="form-check-label">SHOW</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input type="radio" class="form-check-input" ngModel="result" (click)="onClick($event)"  value="false" name="catColumn" mdbInput>
+    <label class="form-check-label">HIDE</label>
+  </div>
+      
+  <app-charts ></app-charts>
+  <app-data-table [result]="result"></app-data-table>
+</div>
+
+
+          
+          
+            
+ 
+         
